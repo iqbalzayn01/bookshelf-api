@@ -1,12 +1,20 @@
 {
   "name": "bookshelf-api",
   "version": "1.0.0",
+  "type": "module",
   "description": "",
   "private": true,
   "scripts": {
-    "start": "node src/server.js"
+    "start": "nodemon src/server.js"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^2.0.22"
+  },
+  "dependencies": {
+    "@hapi/hapi": "^21.3.2",
+    "nanoid": "^4.0.2"
+  }
 }
