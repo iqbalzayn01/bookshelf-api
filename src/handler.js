@@ -67,7 +67,7 @@ export const addBookHandler = (request, h) => {
         bookId: id,
         name: newBook.name,
         publisher: newBook.publisher,
-        insertedAt: newBook.insertedAt, // Tambahkan properti insertedAt ke dalam data respons
+        insertedAt: newBook.insertedAt,
       },
     });
     response.code(201);
@@ -88,7 +88,6 @@ export const getAllBooksHandler = (request, h) => {
 
   let filteredBooks = books;
 
-  // Filter berdasarkan query parameter 'name'
   if (name) {
     const keyword = name.toLowerCase();
     filteredBooks = filteredBooks.filter((book) =>
@@ -96,13 +95,11 @@ export const getAllBooksHandler = (request, h) => {
     );
   }
 
-  // Filter berdasarkan query parameter 'reading'
   if (reading !== undefined) {
     const isReading = reading === "1";
     filteredBooks = filteredBooks.filter((book) => book.reading === isReading);
   }
 
-  // Filter berdasarkan query parameter 'finished'
   if (finished !== undefined) {
     const isFinished = finished === "1";
     filteredBooks = filteredBooks.filter(
@@ -110,7 +107,6 @@ export const getAllBooksHandler = (request, h) => {
     );
   }
 
-  // Ambil hanya properti id, name, dan publisher dari setiap buku
   const simplifiedBooks = filteredBooks.map((book) => ({
     id: book.id,
     name: book.name,
@@ -167,10 +163,6 @@ export const editBookByIdHandler = (request, h) => {
   const index = books.findIndex((book) => book.id === id);
 
   if (!name) {
-    books[index] = {
-      ...books[index],
-    };
-
     const response = h.response({
       status: "fail",
       message: "Gagal memperbarui buku. Mohon isi nama buku",
@@ -180,10 +172,6 @@ export const editBookByIdHandler = (request, h) => {
   }
 
   if (readPage > pageCount) {
-    books[index] = {
-      ...books[index],
-    };
-
     const response = h.response({
       status: "fail",
       message:
